@@ -1,0 +1,3 @@
+A Pen created at CodePen.io. You can find this one at http://codepen.io/SamyBencherif/pen/ONyQOQ.
+
+ This is an infinite maze which you can navigate using the arrow keys or WSAD. This project is a work in progress and would not have been  possible without Processing JS (http://processingjs.org/) for their powerful drawing module for Javascript and Joseph Myers for a high speed implementation of MD5 for JS (http://www.myersdaily.org/joseph/javascript/md5-text.html).

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Game Of Walls</title>
+    
+    
+    
+    
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+
+    <p>Use the arrow keys to move. Use WSAD to modify the world</p>
+
+<script>
+  // Warn if overriding existing method
+  if(Array.prototype.equals)
+    console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
+// attach the .equals method to Array's prototype to call it on any array
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time 
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;       
+        }           
+        else if (this[i] != array[i]) { 
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;   
+        }           
+    }       
+    return true;
+}
+// Hide method from for-in loops
+Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+                                         
+if(Array.prototype.contains)
+    console.warn("Overriding existing Array.prototype.contains. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
+// attach the .contains method to Array's prototype to call it on any array
+Array.prototype.contains = function (thing) {
+    // if the other array is a falsy value, return false
+    if (!this)
+        return false;
+    
+    //start by assuming the array doesn't contain the thing
+    var result = false;
+    for (var i = 0, l=this.length; i < l; i++) 
+      {
+      //if anything in the array is the thing then change our mind from before
+      
+      if (this[i] instanceof Array)
+        {if (this[i].equals(thing))
+          result = true;}
+        else
+          if (this[i]===thing)
+            result = true;
+      
+    
+      } 
+     //return the decision we left in the variable, result
+    return result;     
+}
+// Hide method from for-in loops
+Object.defineProperty(Array.prototype, "contains", {enumerable: false});
+  
+// attach the .indexOf method to Array's prototype to call it on any array
+Array.prototype.indexOf = function (thing) 
+  {
+    // if the other array is a falsy value, return -1
+    if (!this)
+        return -1;
+    
+    //start by assuming the array doesn't contain the thing
+    var result = -1;
+    for (var i = 0, l=this.length; i < l; i++) 
+      {
+      //if anything in the array is the thing then change our mind from before
+      if (this[i] instanceof Array)
+        if (this[i].equals(thing))
+          result = i;
+        else
+          if (this[i]===thing)
+            result = i;
+      
+    
+      } 
+     //return the decision we left in the variable, result
+    return result;
+}
+                                         
+// Hide method from for-in loops
+Object.defineProperty(Array.prototype, "indexOf", {enumerable: false});  
+</script>
+<!-- Thanks to SO user Tomáš Zato for js Array comparison
+ (http://stackoverflow.com/users/607407/tom%C3%A1%C5%A1-zato) -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.3/p5.min.js"></script>
+<!-- Thanks to Processing JS for their powerful drawing module (http://processingjs.org/) -->
+<script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>
+<!--Thanks to Joseph Myers for a fast js implementation of MD5 (http://www.myersdaily.org/joseph/javascript/md5-text.html) -->
+    
+        <script src="js/index.js"></script>
+
+    
+    
+    
+  </body>
+</html>
